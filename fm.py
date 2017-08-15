@@ -1,9 +1,9 @@
 import torch
 from torch.autograd import Variable
 from torch.autograd import gradcheck
+import time
 
 class SecondOrderFM(torch.autograd.Function):
-
     def forward(self, x, w0, w1, v):
         # Follows the notation of Rendle
         self.x = x
@@ -49,6 +49,7 @@ class SecondOrderFM(torch.autograd.Function):
 
 
 def main():
+    from fm_fast import SecondOrderFM
     N_FEATS = 100
     N_FACTORS = 5
 
@@ -57,7 +58,10 @@ def main():
     w1 = Variable(torch.randn(N_FEATS).double(), requires_grad=True)
     v = Variable(torch.randn(N_FEATS, N_FACTORS).double(), requires_grad=True)
 
+    start = time.time()
     test = gradcheck(SecondOrderFM(), (feats_in,w0,w1,v), eps=1e-6, atol=1e-4)
+    end = time.time()
+    print(start-end)
     print(test)
 
 if __name__ == '__main__':

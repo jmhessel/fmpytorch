@@ -1,39 +1,12 @@
 import numpy as np
-import torch
-from torch.autograd import Variable
-from torch.autograd import gradcheck
 import time
-
-from fm_fast_inner import *
-
+import torch
+from fm_fast_inner import fast_forward
 
 class SecondOrderFM(torch.autograd.Function):
     def forward(self, x, w0, w1, v):
         # Follows the notation of Rendle
-        self.x = x
-        self.w0 = w0
-        self.w1 = w1
-        self.v = v
-
-        self.n_feats = x.size()[0]
-        self.n_factors = v.size()[1]
-
-        # compute the sum of products for each feature
-        self.sum_of_products = np.zeros(self.n_factors)
-        self.sum_of_squares = np.zeros(self.n_factors)
-
-        _compute_sop_sos(self.sum_of_products,
-                         self.sum_of_squares,
-                         self.x.numpy(),
-                         self.v.numpy(),
-                         self.n_feats,
-                         self.n_factors)
-
-        output_factor = _compute_output(self.sum_of_products,
-                                        self.sum_of_squares,
-                                        self.n_factors)
-
-        return w0 + torch.dot(x,w1) + output_factor
+        return fast_forward(self, x, w0, w1, v)
 
     def backward(self, grad_output):
         tmp_grad_input = torch.zeros(self.n_feats).double()
