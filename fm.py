@@ -49,7 +49,7 @@ class SecondOrderFM(torch.autograd.Function):
 
 
 def main():
-    from fm_fast import SecondOrderFM
+    #from fm_fast import SecondOrderFM
     N_FEATS = 100
     N_FACTORS = 5
 
@@ -61,7 +61,7 @@ def main():
     start = time.time()
     test = gradcheck(SecondOrderFM(), (feats_in,w0,w1,v), eps=1e-6, atol=1e-4)
     end = time.time()
-    print(start-end)
+    print(end-start)
     print(test)
 
 if __name__ == '__main__':

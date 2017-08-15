@@ -2,7 +2,7 @@ from __future__ import print_function
 
 import torch
 
-from fm import SecondOrderFM
+from fm_fast import SecondOrderFM
 from torch.autograd import Variable
 from torch import nn
 
@@ -21,4 +21,5 @@ class FactorizationMachine(torch.nn.Module):
         self.v.data.uniform_(-0.1, 0.1)
 
     def forward(self, input):
+        print(input.size())
         return SecondOrderFM()(input, self.w0, self.w1, self.v)
