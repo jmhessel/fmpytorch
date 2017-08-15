@@ -42,7 +42,7 @@ def fast_forward(self, x, w0, w1, v):
     self.w1 = w1
     self.v = v
 
-    self.n_feats = x.size()[0]
+    self.n_feats = x.size()[-1]
     self.n_factors = v.size()[1]
 
     # compute the sum of products for each feature
