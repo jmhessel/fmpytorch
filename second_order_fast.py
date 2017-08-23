@@ -1,21 +1,24 @@
 import torch
 from torch.autograd import Variable
+from torch import nn
 
-import time
+from second_order_fast_inner import fast_forward, fast_backward
 
-from second_order_fast_inner import fast_forward
+class SecondOrderInteraction(torch.nn.Module):
+    def __init__(self, n_feats, n_factors):
+        super(SecondOrderInteraction, self).__init__()
+        self.n_feats = n_feats
+        self.n_factors = n_factors
+        self.v = nn.Parameter(torch.Tensor(self.n_feats, self.n_factors),
+                              requires_grad=True)
+        self.v.data.uniform_(-0.01, 0.01)
 
-
-class SecondOrderInteraction(torch.autograd.Function):
-
-    def __init__(self, v):
-        self.v = v
-        self.n_factors = v.size()[-1]
-        self.n_feats = v.size()[0]
-
-    
     def forward(self, x):
-        return fast_forward(self, x)
+        return SecondOrderFunction()(x, self.v)
 
+class SecondOrderFunction(torch.autograd.Function):
+    def forward(self, x, v):
+        return fast_forward(self, x, v)
+        
     def backward(self, grad_output):
-        quit()
+        return fast_backward(self, grad_output)
