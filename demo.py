@@ -11,8 +11,8 @@ from fm import FactorizationMachine
 from torch.autograd import Variable
 
 N_BATCH = 10000
-INPUT_SIZE = 10
-HIDDEN_SIZE = 10
+INPUT_SIZE = 100
+HIDDEN_SIZE = 100
 N_FACTORS_FM = 5
 BATCH_SIZE = 16
 
@@ -34,7 +34,6 @@ np.random.seed(1)
 torch.manual_seed(1)
 
 model = MyModel()
-model.double()
 opt = torch.optim.Adam(model.parameters(), lr=.01)
 model.train()
 
@@ -47,6 +46,7 @@ for batch in range(10000):
     cur_x = np.random.random(size=(BATCH_SIZE, INPUT_SIZE))
     cur_y = true_function(cur_x)
     cur_x, cur_y = Variable(torch.from_numpy(cur_x)), Variable(torch.from_numpy(cur_y))
+    cur_x.float(), cur_y.float()
     opt.zero_grad()
     out = model(cur_x)
     loss = F.mse_loss(out, cur_y)

@@ -4,6 +4,7 @@ from torch import nn
 
 from second_order_fast_inner import fast_forward, fast_backward
 
+
 class SecondOrderInteraction(torch.nn.Module):
     def __init__(self, n_feats, n_factors):
         super(SecondOrderInteraction, self).__init__()
@@ -22,3 +23,4 @@ class SecondOrderFunction(torch.autograd.Function):
         
     def backward(self, grad_output):
         return fast_backward(self, grad_output)
+
