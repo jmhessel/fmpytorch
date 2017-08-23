@@ -11,8 +11,8 @@ from fm import FactorizationMachine
 from torch.autograd import Variable
 
 N_BATCH = 10000
-INPUT_SIZE = 100
-HIDDEN_SIZE = 100
+INPUT_SIZE = 10
+HIDDEN_SIZE = 10
 N_FACTORS_FM = 5
 BATCH_SIZE = 16
 

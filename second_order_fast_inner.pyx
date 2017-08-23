@@ -72,7 +72,7 @@ def fast_forward(self, x, v):
 
 ### Backward Pass ###
 
-#@cython.boundscheck(False)
+@cython.boundscheck(False)
 cdef void _compute_grad_input(REAL_t[:,:] sop,
                               REAL_t[:,:] x,
                               REAL_t[:,:] v,
@@ -95,13 +95,13 @@ cdef void _compute_grad_v(REAL_t[:,:] sop,
                           int n_feats,
                           int n_factors,
                           int batch_size,
-                          REAL_t[:,:,:] grad_v) nogil:
+                          REAL_t[:,:] grad_v) nogil:
     cdef int f,i,b
-    for b in range(batch_size):
-        for i in range(n_feats):
-            for f in range(n_factors):
-                grad_v[b,i,f] = (x[b,i] * sop[b,f] - v[i,f] * x[b,i] * x[b,i]) * dLdy[b,0]
-
+    for i in range(n_feats):
+        for f in range(n_factors):
+            for b in range(batch_size):
+                grad_v[i,f] += (x[b,i] * sop[b,f] - v[i,f] * x[b,i] * x[b,i]) * dLdy[b,0]
+            
 def fast_backward(self, grad_output):
     # this contains
     # d y_k / d x_{k, i}
@@ -119,10 +119,9 @@ def fast_backward(self, grad_output):
     grad_input = grad_input * grad_output
 
     # this contains d y_i / dv_{j,k}
-    grad_v = torch.zeros(self.batch_size,
-                         self.n_feats,
+    grad_v = torch.zeros(self.n_feats,
                          self.n_factors).double()
-
+    
     _compute_grad_v(self.sum_of_products,
                     self.x.numpy(),
                     self.v.numpy(),
@@ -132,6 +131,5 @@ def fast_backward(self, grad_output):
                     self.batch_size,
                     grad_v.numpy())
 
-    grad_v = grad_v.sum(0)
     
     return grad_input, grad_v
