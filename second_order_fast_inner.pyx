@@ -131,6 +131,7 @@ def fast_backward(self, grad_output):
                     self.n_factors,
                     self.batch_size,
                     grad_v.numpy())
+
     grad_v = grad_v.sum(0)
     
     return grad_input, grad_v
