@@ -63,3 +63,15 @@ See examples/demo.py for a full working example.
 ## Thanks to
 
 Vlad Nicule (@vene) for his sage wisdom.
+
+The original factorization machine citation, which this layer is based off of, is
+
+```
+@inproceedings{rendle2010factorization,
+	       title={Factorization machines},
+    	       author={Rendle, Steffen},
+      	       booktitle={ICDM},
+               pages={995--1000},
+	       year={2010},
+	       organization={IEEE}
+}
