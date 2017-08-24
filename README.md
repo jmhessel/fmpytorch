@@ -35,7 +35,7 @@ class MyModel(torch.nn.Module):
         return x
 ```
 
-See examples/demo.py for a fuller example.
+See examples/toy.py or examples/regression.py for fuller examples.
 
 ## Installation
 
@@ -81,7 +81,7 @@ faster. I've only tested it with python 2 at the moment.
 
 ## TODOs
 
-1. More useage examples
+1. More interesting useage examples
 2. More testing, e.g., with python 3, etc.
 3. Make sure all of the code plays nice with torch-specific stuff, e.g., GPUs
 4. Arbitrary order factorization machine support
