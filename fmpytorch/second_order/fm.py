@@ -22,6 +22,11 @@ except ImportError:
 class FactorizationMachine(torch.nn.Module):
     '''Second order factorization machine layer'''
     def __init__(self, input_features, factors):
+        '''
+        - input_features (int): the length of the input vector.
+        - factors (int): the dimension of the interaction terms.
+        '''
+        
         super(FactorizationMachine, self).__init__()
         if not FAST_VERSION:
             print('Slow version of {0} is being used'.format(__name__))
