@@ -14,7 +14,7 @@ find the code useful.
 Currently, only a second order factorization machine is supported. The
 forward and backward passes are implemented in cython. Compared to the
 autodiff solution, the cython passes run several orders of magnitude
-faster.
+faster. I've only tested it with python 2 at the moment.
 
 ## Installation
 
@@ -53,12 +53,12 @@ See examples/demo.py for a full working example.
 
 ## TODOs
 
-1. Sparse tensor support
-2. More use-cases
-3. More testing
-4. Make sure all of the code plays nice with torch-specific stuff, e.g., GPUs
-5. Arbitrary order factorization machine support
-6. Better organization
+0. Python 3 support
+1. More use-cases
+2. More testing
+3. Make sure all of the code plays nice with torch-specific stuff, e.g., GPUs
+4. Arbitrary order factorization machine support
+5. Better organization
 
 ## Thanks to
 
