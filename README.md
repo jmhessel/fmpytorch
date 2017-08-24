@@ -32,7 +32,7 @@ However, this introduces a large number of `w2` variables. Specifically, there a
 <a href="url"><img src="https://raw.githubusercontent.com/jmhessel/fmpytorch/master/images/fm.png" width="400" align="center"></a>
 </p>
 
-where each `v_i` is a low-dimensional vector.
+where each `v_i` is a low-dimensional vector. This is the forward pass of a second order factorization machine. Magically, the forward (and backward) pass can be reformulated so that it can be computed in `O(k*n)`, rather than the naive `O(kn^2)` formulation above.
 
 ## Currently supported features
 
