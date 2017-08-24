@@ -14,17 +14,23 @@ find the code useful.
 
 A linear model, given a vector `x` models its output `y` as
 
-![Linear Model](https://raw.githubusercontent.com/jmhessel/fmpytorch/master/images/linear_model.png)
+<p>
+<a href="url"><img src="https://raw.githubusercontent.com/jmhessel/fmpytorch/master/images/linear_model.png" width="250" align="center"></a>
+</p>
 
 where `w` are the learnable weights of the model.
 
 However, the interactions between the input variables `x_i` is purely additive. In some cases, it might be useful to model the interactions between your variables, e.g., `x_i * x_j`. You could add terms into your model like
 
-![Second Order Model](https://raw.githubusercontent.com/jmhessel/fmpytorch/master/images/second_order.png)
+
+<p>
+<a href="url"><img src="https://raw.githubusercontent.com/jmhessel/fmpytorch/master/images/second_order.png" width="400" align="center"></a>
+</p>
 
 However, this introduces a large number of `w2` variables. Specifically, there are `O(n^2)` parameters introduced in this formulation, one for each interaction pair. A factorization machine approximates `w2` using low dimensional factors, i.e.,
-
-![Second Order Factorization Machine](https://raw.githubusercontent.com/jmhessel/fmpytorch/master/images/fm.png)
+<p>
+<a href="url"><img src="https://raw.githubusercontent.com/jmhessel/fmpytorch/master/images/fm.png" width="400" align="center"></a>
+</p>
 
 where each `v_i` is a low-dimensional vector.
 
