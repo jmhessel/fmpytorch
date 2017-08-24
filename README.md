@@ -65,6 +65,8 @@ class MyModel(torch.nn.Module):
         super(MyModel, self).__init__()
         self.linear = torch.nn.Linear(100, 50)
         self.dropout = torch.nn.Dropout(.5)
+	# This makes a fm layer mapping from 50-D to 1-D.
+	# The number of factors is 5.
         self.fm = FactorizationMachine(50, 5)
 
     def forward(self, x):
