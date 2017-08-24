@@ -14,17 +14,17 @@ find the code useful.
 
 A linear model, given a vector `x` models its output `y` as
 
-!(/images/linear_model.png)
+!(/images/linear_model.png?raw=true)
 
 where `w` are the learnable weights of the model.
 
 However, the interactions between the input variables `x_i` is purely additive. In some cases, it might be useful to model the interactions between your variables, e.g., `x_i * x_j`. You could add terms into your model like
 
-!(/images/second_order.png)
+!(/images/second_order.png?raw=true)
 
 However, this introduces a large number of `w2` variables. Specifically, there are `O(n^2)` parameters introduced in this formulation, one for each interaction pair. A factorization machine approximates `w2` using low dimensional factors, i.e.,
 
-!(/images/fm.png)
+!(/images/fm.png?raw=true)
 
 where each `v_i` is a low-dimensional vector.
 
