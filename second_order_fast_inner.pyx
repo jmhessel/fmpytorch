@@ -63,7 +63,8 @@ def fast_forward(self, x, v):
                      self.n_factors,
                      self.batch_size)
 
-    output_factor = np.zeros(self.batch_size)
+    output_factor = np.zeros(self.batch_size,
+                             dtype=self.x.numpy().dtype)
     _compute_output(self.sum_of_products,
                     self.sum_of_squares,
                     self.n_factors,

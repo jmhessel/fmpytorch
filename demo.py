@@ -43,10 +43,9 @@ def true_function(input):
 
 start = time.time()
 for batch in range(10000):
-    cur_x = np.random.random(size=(BATCH_SIZE, INPUT_SIZE))
+    cur_x = np.random.random(size=(BATCH_SIZE, INPUT_SIZE)).astype(np.float32)
     cur_y = true_function(cur_x)
     cur_x, cur_y = Variable(torch.from_numpy(cur_x)), Variable(torch.from_numpy(cur_y))
-    cur_x.float(), cur_y.float()
     opt.zero_grad()
     out = model(cur_x)
     loss = F.mse_loss(out, cur_y)
