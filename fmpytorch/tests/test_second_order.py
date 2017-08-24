@@ -9,8 +9,8 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from second_order_naive import SecondOrderInteraction as SOISlow
-from second_order_fast import SecondOrderInteraction as SOIFast
+from fmpytorch.second_order.second_order_naive import SecondOrderInteraction as SOISlow
+from fmpytorch.second_order.second_order_fast import SecondOrderInteraction as SOIFast
 from torch.autograd import Variable
 
 INPUT_SIZE = 50
