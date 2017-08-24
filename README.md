@@ -27,7 +27,7 @@ cd fmpytorch
 sudo python setup.py install
 ```
 
-## Demo
+## Usage
 
 The factorization machine layers in fmpytorch can be used just like any other built-in module. Here's a simple feed-forward model
 
