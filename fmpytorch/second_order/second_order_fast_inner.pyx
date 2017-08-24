@@ -110,7 +110,7 @@ def _compute_grad_v(floating[:,:] sop,
                 
 def fast_backward(self, grad_output):
     
-    # this contains XX
+    # this contains d L / d x_{i,j}
     grad_input = grad_output.new(self.batch_size, self.n_feats).zero_()
     
     _compute_grad_input(self.sum_of_products,
