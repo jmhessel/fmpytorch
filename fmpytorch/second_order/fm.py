@@ -13,10 +13,10 @@ from torch.autograd import Variable
 
 try:
     FAST_VERSION = True
-    from second_order_fast import SecondOrderInteraction
+    from .second_order_fast import SecondOrderInteraction
 except ImportError:
     FAST_VERSION = False
-    from second_order_naive import SecondOrderInteraction
+    from .second_order_naive import SecondOrderInteraction
 
     
 class FactorizationMachine(torch.nn.Module):

@@ -1,8 +1,10 @@
+from __future__ import print_function
+
 import torch
 from torch.autograd import Variable
 from torch import nn
 
-from second_order_fast_inner import fast_forward, fast_backward
+from .second_order_fast_inner import fast_forward, fast_backward
 
 
 class SecondOrderInteraction(torch.nn.Module):
@@ -17,6 +19,7 @@ class SecondOrderInteraction(torch.nn.Module):
     def forward(self, x):
         return SecondOrderFunction()(x, self.v)
 
+    
 class SecondOrderFunction(torch.autograd.Function):
     def forward(self, x, v):
         return fast_forward(self, x, v)
