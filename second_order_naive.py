@@ -9,15 +9,14 @@ class SecondOrderInteraction(torch.nn.Module):
         super(SecondOrderInteraction, self).__init__()
         self.n_feats = n_feats
         self.n_factors = n_factors
-        self.v = nn.Parameter(torch.Tensor(self.n_feats, self.n_factors),
-                              requires_grad=True)
+        self.v = nn.Parameter(torch.Tensor(self.n_feats, self.n_factors))
         self.v.data.uniform_(-0.01, 0.01)
-
+        
     def forward(self, x):
         self.batch_size = x.size()[0]
         self.n_feats = x.size()[-1]
         self.n_factors = self.v.size()[-1]
-        output = Variable(torch.zeros(self.batch_size, self.n_feats, self.n_feats).double())
+        output = Variable(x.data.new(self.batch_size, self.n_feats, self.n_feats).zero_())
         all_interactions = torch.mm(self.v, self.v.t())
         for b in range(self.batch_size):
             for i in range(self.n_feats):
