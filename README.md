@@ -2,12 +2,31 @@
 
 A library for factorization machines in pytorch. A factorization
 machine is like a linear model, except multiplicative interaction
-terms between the variables are modeled as well. The input to a factorization
-machine layer is a vector, and the output is a scalar. Batching is fully
-supported.
+terms between the variables are modeled as well.
+
+The input to a factorization machine layer is a vector, and the output
+is a scalar. Batching is fully supported.
 
 This is a work in progress. Feedback and bugfixes welcome! Hopefully you
 find the code useful.
+
+## Factorization Machine brief intro
+
+A linear model, given a vector `x` models its output `y` as
+
+(images/linear_model.png)
+
+where `w` are the learnable weights of the model.
+
+However, the interactions between the input variables `x_i` is purely additive. In some cases, it might be useful to model the interactions between your variables, e.g., `x_i * x_j`. You could add terms into your model like
+
+(images/second_order.png)
+
+However, this introduces a large number of `w2` variables. Specifically, there are `O(n^2)` parameters introduced in this formulation, one for each interaction pair. A factorization machine approximates `w2` using low dimensional factors, i.e.,
+
+(images/fm.png)
+
+where each `v_i` is a low-dimensional vector.
 
 ## Currently supported features
 
@@ -29,7 +48,7 @@ sudo python setup.py install
 
 ## Usage
 
-The factorization machine layers in fmpytorch can be used just like any other built-in module. Here's a simple feed-forward model
+The factorization machine layers in fmpytorch can be used just like any other built-in module. Here's a simple feed-forward model using a factorization machine that takes in a 50-D input, and models interactions using `k=5` factors.
 
 ```
 import torch
