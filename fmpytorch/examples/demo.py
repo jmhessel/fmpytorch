@@ -7,7 +7,7 @@ import time
 import torch
 import torch.nn.functional as F
 
-from fm import FactorizationMachine
+from fmpytorch.second_order.fm import FactorizationMachine
 from torch.autograd import Variable
 
 N_BATCH = 10000
