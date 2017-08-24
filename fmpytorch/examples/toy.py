@@ -34,6 +34,7 @@ np.random.seed(1)
 torch.manual_seed(1)
 
 model = MyModel()
+model.cuda()
 opt = torch.optim.Adam(model.parameters(), lr=.01)
 model.train()
 
@@ -46,6 +47,8 @@ for batch in range(10000):
     cur_x = np.random.random(size=(BATCH_SIZE, INPUT_SIZE)).astype(np.float32)
     cur_y = true_function(cur_x)
     cur_x, cur_y = Variable(torch.from_numpy(cur_x)), Variable(torch.from_numpy(cur_y))
+    cur_x, cur_y = cur_x.cuda(), cur_y.cuda()
+    #cur_y.cuda()
     opt.zero_grad()
     out = model(cur_x)
     loss = F.mse_loss(out, cur_y)

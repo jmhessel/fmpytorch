@@ -53,6 +53,8 @@ def get_batch(batch_size=32):
 # Define model
 fc = FactorizationMachine(W_target.size(0), 5)
 
+fc.cuda()
+
 for batch_idx in count(1):
     # Get data
     batch_x, batch_y = get_batch()

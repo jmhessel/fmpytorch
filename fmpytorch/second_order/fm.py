@@ -36,6 +36,22 @@ class FactorizationMachine(torch.nn.Module):
                                                    self.factors)
 
     def forward(self, x):
+        # make sure everything is on the CPU.
+        self.linear.cpu()
+        self.second_order.cpu()
+        
+        back_to_gpu = False
+        
+        if x.is_cuda:
+            x = x.cpu()
+            back_to_gpu = True
+
         linear = self.linear(x)
         interaction = self.second_order(x)
-        return linear + interaction
+        res = linear + interaction
+
+        if back_to_gpu:
+            res = res.cuda()
+            x = x.cuda()
+
+        return res
