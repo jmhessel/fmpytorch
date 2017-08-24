@@ -10,6 +10,44 @@ is a scalar. Batching is fully supported.
 This is a work in progress. Feedback and bugfixes welcome! Hopefully you
 find the code useful.
 
+
+## Usage
+
+The factorization machine layers in fmpytorch can be used just like any other built-in module. Here's a simple feed-forward model using a factorization machine that takes in a 50-D input, and models interactions using `k=5` factors.
+
+```
+import torch
+from fmpytorch.second_order.fm import FactorizationMachine
+
+class MyModel(torch.nn.Module):
+    def __init__(self):
+        super(MyModel, self).__init__()
+        self.linear = torch.nn.Linear(100, 50)
+        self.dropout = torch.nn.Dropout(.5)
+	# This makes a fm layer mapping from 50-D to 1-D.
+	# The number of factors is 5.
+        self.fm = FactorizationMachine(50, 5)
+
+    def forward(self, x):
+        x = self.linear(x)
+        x = self.dropout(x)
+        x = self.fm(x)
+        return x
+```
+
+See examples/demo.py for a fuller example.
+
+## Installation
+
+This package requires pytorch, numpy, and cython.
+
+To install, you can run:
+
+```
+cd fmpytorch
+sudo python setup.py install
+```
+
 ## Factorization Machine brief intro
 
 A linear model, given a vector `x` models its output `y` as
@@ -40,43 +78,6 @@ Currently, only a second order factorization machine is supported. The
 forward and backward passes are implemented in cython. Compared to the
 autodiff solution, the cython passes run several orders of magnitude
 faster. I've only tested it with python 2 at the moment.
-
-## Installation
-
-This package requires pytorch, numpy, and cython.
-
-To install, you can run:
-
-```
-cd fmpytorch
-sudo python setup.py install
-```
-
-## Usage
-
-The factorization machine layers in fmpytorch can be used just like any other built-in module. Here's a simple feed-forward model using a factorization machine that takes in a 50-D input, and models interactions using `k=5` factors.
-
-```
-import torch
-from fmpytorch.second_order.fm import FactorizationMachine
-
-class MyModel(torch.nn.Module):
-    def __init__(self):
-        super(MyModel, self).__init__()
-        self.linear = torch.nn.Linear(100, 50)
-        self.dropout = torch.nn.Dropout(.5)
-	# This makes a fm layer mapping from 50-D to 1-D.
-	# The number of factors is 5.
-        self.fm = FactorizationMachine(50, 5)
-
-    def forward(self, x):
-        x = self.linear(x)
-        x = self.dropout(x)
-        x = self.fm(x)
-        return x
-```
-
-See examples/demo.py for a full working example.
 
 ## TODOs
 
