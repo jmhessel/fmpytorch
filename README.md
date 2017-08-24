@@ -80,12 +80,11 @@ See examples/demo.py for a full working example.
 
 ## TODOs
 
-0. Python 3 support
-1. More use-cases
-2. More testing
+1. More useage examples
+2. More testing, e.g., with python 3, etc.
 3. Make sure all of the code plays nice with torch-specific stuff, e.g., GPUs
 4. Arbitrary order factorization machine support
-5. Better organization
+5. Better organization/code cleaning
 
 ## Thanks to
 
