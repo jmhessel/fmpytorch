@@ -89,7 +89,7 @@ faster. I've only tested it with python 2 at the moment.
 
 ## Thanks to
 
-Vlad Nicule (@vene) for his sage wisdom.
+Vlad Niculae (@vene) for his sage wisdom.
 
 The original factorization machine citation, which this layer is based off of, is
 
