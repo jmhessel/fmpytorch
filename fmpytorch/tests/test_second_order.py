@@ -52,11 +52,15 @@ def _forward_backward_check(dtype):
         fast.double()
         
     for i in range(N_TESTS):
-        x = Variable(torch.from_numpy(np.random.random((32, INPUT_SIZE)).astype(dtype)))
+        input = np.random.random((32, INPUT_SIZE)).astype(dtype)
+        x_slow = Variable(torch.from_numpy(input),
+                          requires_grad=True)
+        x_fast = Variable(torch.from_numpy(input),
+                          requires_grad=True)
         y = Variable(torch.from_numpy(np.random.random((32, 1)).astype(dtype)))
         
-        out_slow = slow(x)
-        out_fast = fast(x)
+        out_slow = slow(x_slow)
+        out_fast = fast(x_fast)
         
         assert np.allclose(out_slow.data.numpy(),
                            out_fast.data.numpy()), "Forward passes differed for {}".format(dtype)
@@ -69,6 +73,9 @@ def _forward_backward_check(dtype):
         for var_slow, var_fast in zip(slow.parameters(), fast.parameters()):
             assert np.allclose(var_slow.grad.data.numpy(),
                                var_fast.grad.data.numpy()), "Backward passes differed for {}".format(dtype)
+        
+        assert np.allclose(x_slow.grad.data.numpy(),
+                           x_fast.grad.data.numpy()), "Backward passes differed for {}".format(dtype)
 
     
 def test_forward_backward_float():
