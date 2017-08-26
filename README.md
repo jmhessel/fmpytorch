@@ -58,7 +58,7 @@ A linear model, given a vector `x` models its output `y` as
 
 where `w` are the learnable weights of the model.
 
-However, the interactions between the input variables `x_i` is purely additive. In some cases, it might be useful to model the interactions between your variables, e.g., `x_i * x_j`. You could add terms into your model like
+However, the interactions between the input variables `x_i` are purely additive. In some cases, it might be useful to model the interactions between your variables, e.g., `x_i * x_j`. You could add terms into your model like
 
 
 <p>
