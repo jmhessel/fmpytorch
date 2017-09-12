@@ -81,6 +81,7 @@ faster. I've only tested it with python 2 at the moment.
 
 ## TODOs
 
+0. Support for sparse tensors.
 1. More interesting useage examples
 2. More testing, e.g., with python 3, etc.
 3. Make sure all of the code plays nice with torch-specific stuff, e.g., GPUs
