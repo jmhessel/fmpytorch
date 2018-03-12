@@ -15,7 +15,7 @@ find the code useful.
 
 The factorization machine layers in fmpytorch can be used just like any other built-in module. Here's a simple feed-forward model using a factorization machine that takes in a 50-D input, and models interactions using `k=5` factors.
 
-```
+```python
 import torch
 from fmpytorch.second_order.fm import FactorizationMachine
 
